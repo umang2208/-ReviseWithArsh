@@ -1,0 +1,23 @@
+class Solution{
+  public:
+    vector<vector<string> > Anagrams(vector<string>& string_list) {
+        //code here
+        //using maping of string with string array
+        unordered_map<string,vector<string>> mp;
+        
+        //  intialize a ans string array
+        vector<vector<string>> vs;
+        
+        
+        for(auto s:string_list){
+           string s1=s;
+           //sort string word for storing string elements
+           sort(s1.begin(),s1.end());
+           mp[s1].push_back(s);
+        }
+        for(auto i:mp){
+            vs.push_back(i.second);
+        }
+        return vs;
+    }
+};
