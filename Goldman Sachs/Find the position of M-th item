@@ -1,0 +1,17 @@
+//question link:- https://practice.geeksforgeeks.org/problems/find-the-position-of-m-th-item1723/1/
+class Solution {
+  public:
+    int findPosition(int N , int M , int K) {
+        // code here
+        // if distributed item is less than total item with their starting possition
+        if(M<= N-K+1){
+            return M+K-1;
+        }
+        // now distribue aall the item first time to n 
+        M=M-(N-K+1);
+        
+        //now check item last possiton 
+        if(M%N==0)return N;
+        return M%N;
+    }
+};
