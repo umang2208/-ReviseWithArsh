@@ -1,0 +1,36 @@
+//question link:-https://practice.geeksforgeeks.org/problems/ugly-numbers2254/1/#
+
+class Solution{
+public:	
+	// #define ull unsigned long long
+	/* Function to get the nth ugly number*/
+	ull getNthUglyNo(int n) {
+	    // code here
+	    ull a[n];
+	    ull fortwo=0,forthree=0,forfour=0;
+	    ull mul2=2,mul3=3,mul5=5;
+	    ull pro=1;
+	    a[0]=1;
+	    for(int i=1;i<n;i++){
+	        pro=min(mul2,min(mul3,mul5));
+	        //storing next minimum factor of 2,3,or 5
+	        a[i]=pro;
+	        if(pro==mul2){
+	            fortwo++;
+	            //calculate next multiple of two
+	            mul2=a[fortwo]*2;
+	        }
+	         if(pro==mul3){
+	            forthree++;
+	            //calculate next multiple of three
+	            mul3=a[forthree]*3;
+	        }
+	         if(pro==mul5){
+	            forfour++;
+	            //calculate next multiple of five
+	            mul5=a[forfour]*5;
+	        }
+	    }
+	    return pro;
+	}
+};
