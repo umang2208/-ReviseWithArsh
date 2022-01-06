@@ -1,0 +1,29 @@
+
+//question link:-https://practice.geeksforgeeks.org/problems/find-missing-and-repeating2512/1/#
+class Solution{
+public:
+    int *findTwoElement(int *arr, int n) {
+        // code here
+        // using count array
+        int mp[100001]={0};
+        for(int i=0;i<n;i++){
+            mp[arr[i]]++;
+        }
+        int *var=new int[2];
+        bool flag=true,flag1=true;
+        for(int i=1;i<100001;i++){
+            
+            // if(i.first==0)continue;
+            if(mp[i]==0 and flag==true){
+                var[1]=i;
+                flag=false;
+            }
+           else if(mp[i]>1 and flag1==true){
+                var[0]=i;
+                flag1=false;
+            }
+            if(!flag and !flag1)return var;
+        }
+        return var;
+    }
+};
