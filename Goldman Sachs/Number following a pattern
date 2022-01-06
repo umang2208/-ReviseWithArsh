@@ -1,0 +1,27 @@
+
+class Solution{
+    //question link:- https://practice.geeksforgeeks.org/problems/number-following-a-pattern3126/1
+public:
+    string printMinNumberForPattern(string S){
+        // code here 
+        
+        string pattern="";
+        int i=0,j=0,count=1;
+        while(i<=S.size()){
+        
+            if(S[i]=='I' or i==S.size()){
+                while(count>=1){
+                    if(count<=j)
+                        break;
+                    pattern+=to_string(count);
+                    count--;
+                }
+                j=i+1;
+                count=i+1;
+            }
+            count++;
+            i++;
+        }
+        return pattern;
+    }
+};
