@@ -1,0 +1,49 @@
+//question link:- https://practice.geeksforgeeks.org/problems/decode-the-string2444/1#
+class Solution{
+public:
+    string decodedString(string s){
+     stack<char> st;
+        for(int i=0;i<s.size();i++){
+            
+            //push string elements untill we have not left square bracket
+            if(s[i]!=']'){
+                st.push(s[i]);
+            }
+            else{
+                string str="";
+                //now traverse untill left sqaure bracket
+                while(st.top()!='['){
+                    str=st.top()+str;
+                    st.pop();
+                }
+                //pop bracket
+                st.pop();
+                
+                string number="";
+                
+                // check there was a number of not previously 
+                //if it was number so how much long this was
+                while(!st.empty() and isdigit(st.top())){
+                    number=st.top()+number;
+                    st.pop();
+                }
+                //push alll the chars in stack while it was not reach on the required one
+                int num=stoi(number);
+                while(num--){
+                    for(int j=0;j<str.size();j++){
+                        st.push(str[j]);
+                    }
+                }
+            }
+        }
+        s="";
+      //  cout<<st.size();
+      
+      //put all the chars in string 
+        while(!st.empty()){
+          
+            s=st.top()+s;
+            st.pop();
+        }
+        return s;
+    }
