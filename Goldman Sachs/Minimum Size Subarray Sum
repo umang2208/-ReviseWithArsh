@@ -1,0 +1,60 @@
+//question link:-https://leetcode.com/problems/minimum-size-subarray-sum/
+// I AM DISCUSSION 2 ACCEPTED SOLUTION HERE ONE IS BRUTE FORCE IN (n)2  AND ANOTHER IS 2 POINTER 
+
+1-> BRUTE FORCE....................................................................................................................
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        
+        int count=0,x=INT_MAX,sum=0;
+        if(nums[nums.size()-1]==target) return 1;
+        for(int i=0;i<nums.size()-1;i++){
+            sum=0;
+            sum+=nums[i];count=1;
+            if(nums[i]>=target){
+                return 1;
+            }
+            for(int j=i+1;j<nums.size();j++){
+                sum+=nums[j];
+                 count++;
+            //    if(sum> target)break;
+                if(sum>=target){
+                    x=min(x,count);
+                    break;
+                }
+               
+            }
+        }
+        if(x==INT_MAX)
+            return 0;
+        return x;
+    }
+};
+ 
+ 2ND SOLUTION ................................................................................................................................................
+ class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int n=nums.size();
+        int res=INT_MAX,j=0,sum=0;
+        
+        // continue sum of array
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+            
+            //if sum >=target so we try to squeze the array from left side whenever it is not less than to the target
+            while(sum>=target){
+                
+                // store ans. min. of current length
+                res=min(res,i+1-j);
+                
+                // substract from left side which couse it greter
+                sum-= nums[j];
+                j++;
+            }
+        }
+        if(res==INT_MAX)
+            return 0;
+        return res;
+    }
+};
