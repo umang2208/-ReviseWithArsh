@@ -1,0 +1,32 @@
+//question link:-https://leetcode.com/problems/longest-mountain-in-array/
+class Solution {
+public:
+    int longestMountain(vector<int>& arr) {
+        //using two pointers to get the peaks ..
+        
+        int n=arr.size();
+        int res=0,i=0;
+        while(i<n){
+            int j=i;
+            //check j+1 for checking last element index
+            
+            if(j+1 <n and arr[j]<arr[j+1]){
+                //continue loop while it is in incresing order
+                while(j+1<n and arr[j]<arr[j+1])
+                    j++;
+              
+            if(j+1<n and arr[j]>arr[j+1]){
+                //loop for decresing order
+                while(j+1<n and arr[j]>arr[j+1])
+                    j++;
+                
+            
+            res=max(res,j-i+1);
+                      }
+            }
+            //iterate the pointers to new possiton
+            i=max(j,i+1);
+        }
+        return res;
+    }
+};
