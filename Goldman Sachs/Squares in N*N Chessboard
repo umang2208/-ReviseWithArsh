@@ -1,0 +1,10 @@
+class Solution{
+  //question link:-https://practice.geeksforgeeks.org/problems/squares-in-nn-chessboard1801/1
+  public:
+    long long squaresInChessBoard(long long N) {
+        
+        //for reference how this formula came u can visit
+        //https://www.puzzlesbrain.com/math-puzzles/how-to-count-squares-in-n-x-n-grid/
+        return (N*(N+1)*((2*N)+1))/6;
+    }
+};
