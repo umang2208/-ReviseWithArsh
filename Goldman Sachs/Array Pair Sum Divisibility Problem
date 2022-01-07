@@ -1,0 +1,27 @@
+class Solution {
+    //question link :-https://practice.geeksforgeeks.org/problems/array-pair-sum-divisibility-problem3257/1#
+  public:
+    bool canPair(vector<int> nums, int k) {
+        //we try to make a hash array and try to calculate all are pairs or not
+        
+        map<int,int> mp;
+        int rem,count;
+        
+        for(auto x:nums){
+            // make a remainder count
+            mp[x%k]++;
+        }
+        //cndn for if mod is 0 and it is not even 
+        if(mp[0]%2==1){
+            return false;
+        }
+        for(auto x:mp){
+            // what is index and it count
+            rem=x.first;
+            count=x.second;
+            if(rem!=0 and mp[k-rem]!=count)
+            return false;
+        }
+        return true;
+    }
+};
