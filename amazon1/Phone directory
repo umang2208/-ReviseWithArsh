@@ -1,0 +1,35 @@
+//question link:-https://practice.geeksforgeeks.org/problems/phone-directory4628/1/#
+class Solution{
+public:
+    vector<vector<string>> displayContacts(int n, string contact[], string s)
+    {
+        
+        //declare a 2 d matrix string of size s
+        vector<vector<string>>vs(s.size());
+        
+        //remove dublicates from contacts
+        set<string> st;
+        for(int i=0;i<n;i++){
+            st.insert(contact[i]);
+        }
+       
+        string s1;
+        for(int i=0;i<s.size();i++){
+            
+            //create substring for searching
+            s1+= s[i];
+             
+            for(auto j:st){
+                int k=s1.size();
+                
+                // check  contact is avaailable or not
+                if(s1==j.substr(0,k)){
+                    vs[i].push_back(j);
+                }
+            }
+            if(vs[i].size()==0)vs[i].push_back("0");
+            
+        }
+        return vs;
+    }
+};
