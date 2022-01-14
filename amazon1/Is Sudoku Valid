@@ -1,0 +1,217 @@
+//Question link:-https://practice.geeksforgeeks.org/problems/is-sudoku-valid4820/1/#
+another on leetcode
+
+leetcode question link:=https://leetcode.com/problems/valid-sudoku/
+
+//i am discussing two approaches here one is tle and another is accepted
+/////////////////////////////////////////////////////////////ACCEPTED SOLUTION////////////////////////////////////////////////////////////////////////////////////////////
+class Solution{
+public:
+    int isValid(vector<vector<int>> mat){
+    //CREATE 3 MATRIX FOR ROW COLOUM AND SUBMATRIX
+        int check1[9][9] = {0}, check2[9][9] = {0}, check3[9][9] = {0};
+        for(int i=0;i<mat.size();i++){
+            for(int j=0;j<mat[i].size();j++){
+                if(mat[i][j]!=0){
+                int num= mat[i][j]-1;
+                
+                //FOR REFERENCE https://leetcode.com/problems/valid-sudoku/discuss/15464/My-short-solution-by-C%2B%2B.-O(n2)
+                int k=i/3 *3 + j/3;
+                if( check1[i][num] || check2[j][num] || check3[k][num]){
+                    return 0;
+                }
+                check1[i][num] = check2[j][num] = check3[k][num]=1;
+                    
+                }
+            }
+           
+        }
+         return 1;
+         }
+}:
+
+...................................................................TLE......................................................................
+class Solution{
+public:
+    int isValid(vector<vector<int>> mat){
+
+        vector<vector<char>>board;
+        
+        for(int i=0;i<mat.size();i++){
+            vector<char>vc;
+            for(int j=0;j<mat.size();j++){
+                // cout<<mat[i][j];
+              char c=(char)(mat[i][j])+'0';
+            //   cout<<c<<"->";
+            if(c=='0'){
+                vc.push_back('.');
+            }
+            else
+                vc.push_back(c);
+            }
+            board.push_back(vc);
+        }
+        //CHECK IN ALL FORM OF SUBMATRIC AND ALL COLOUMS VISE 
+         string s;
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]!='.')
+              s+=board[i][j];  }
+        
+        sort(s.begin(),s.end());
+        for(int j=0;j<s.length();j++){
+          // cout<<s<<" ";
+          //CHECK FOR DUBLICATES......................................................
+            if(s[j]==s[j+1])
+                return 0;
+        }
+        s.clear();}
+        s.clear();
+      for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++)
+                if(board[j][i]!='.')
+              s+=board[j][i];  
+        
+        sort(s.begin(),s.end());
+        for(int j=0;j<s.length();j++){
+            if(s[j]==s[j+1])
+                return 0;
+        }
+        s.clear();}
+          s.clear();
+            for(int j=0;j<3;j++){
+                for(int k=0;k<3;k++){
+                    if(board[j][k]!='.')
+                        s+=board[j][k];
+                }}
+                sort(s.begin(),s.end());
+                for(int i=0;i<s.length();i++){
+                    if(s[i]==s[i+1]){
+                        // cout<<s<<" 1 ";
+                        return 0;}
+                }
+                s.clear();
+
+         for(int j=0;j<3;j++){
+                for(int k=3;k<6;k++){
+                    if(board[j][k]!='.')
+                        s+=board[j][k];
+                }}
+                sort(s.begin(),s.end());
+                for(int i=0;i<s.length();i++){
+                 if(s[i]==s[i+1]){
+                        // cout<<s<<" 2 ";
+                        return 0;}
+                }
+                
+             s.clear();
+           
+         for(int j=0;j<3;j++){
+                for(int k=6;k<9;k++){
+                    if(board[j][k]!='.')
+                        s+=board[j][k];
+                }}
+                sort(s.begin(),s.end());
+                for(int i=0;i<s.length();i++){
+                     if(s[i]==s[i+1]){
+                        // cout<<s<<" 3 ";
+                        return 0;}
+                }
+                
+             s.clear();
+           
+        for(int i=3;i<6;i++){
+            for(int j=0;j<3;j++){
+                if(board[i][j]!='.'){
+                    s+=board[i][j];
+                }
+            }}
+            sort(s.begin(),s.end());
+            for(int j=0;j<s.length();j++){
+                if(s[j]==s[j+1]){
+                        // cout<<s<<" 4 ";
+                        return 0;}
+                }
+            
+            s.clear();
+   
+          for(int i=3;i<6;i++){
+            for(int j=3;j<6;j++){
+                if(board[i][j]!='.'){
+                    s+=board[i][j];
+                }
+            }}
+            sort(s.begin(),s.end());
+            for(int j=0;j<s.length();j++){
+                  if(s[j]==s[j+1]){
+                        // cout<<s<<" 5 ";
+                        return 0;}
+                }
+            
+            s.clear();
+     
+          for(int i=3;i<6;i++){
+            for(int j=6;j<9;j++){
+                if(board[i][j]!='.'){
+                    s+=board[i][j];
+                }
+            }}
+            sort(s.begin(),s.end());
+            for(int j=0;j<s.length();j++){
+                 if(s[j]==s[j+1]){
+                        // cout<<s<<" 6 ";
+                        return 0;}
+                }
+            
+            s.clear();
+       
+          for(int i=6;i<9;i++){
+            for(int j=0;j<3;j++){
+                if(board[i][j]!='.'){
+                    s+=board[i][j];
+                }
+            }}
+            sort(s.begin(),s.end());
+            for(int j=0;j<s.length();j++){
+                  if(s[j]==s[j+1]){
+                        // cout<<s<<" 7 ";
+                        return 0;}
+                }
+            
+            s.clear();
+       
+          for(int i=6;i<9;i++){
+            for(int j=3;j<6;j++){
+                if(board[i][j]!='.'){
+                    s+=board[i][j];
+                }
+            }}
+            sort(s.begin(),s.end());
+            for(int j=0;j<s.length();j++){
+                 if(s[j]==s[j+1]){
+                        // cout<<s<<" 1 ";
+                        return 0;}
+                }
+            
+            s.clear();
+        
+          for(int i=6;i<9;i++){
+            for(int j=6;j<9;j++){
+                if(board[i][j]!='.'){
+                    s+=board[i][j];
+                }
+            }}
+            sort(s.begin(),s.end());
+            for(int j=0;j<s.length();j++){
+              if(s[j]==s[j+1]){
+                        // cout<<s<<" 1 ";
+                        return 0;}
+                }
+            
+            s.clear();
+        
+      
+        
+        return 1;
+    }
+};
