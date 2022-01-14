@@ -1,0 +1,43 @@
+question link:-https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1#
+
+class solution{
+public:
+		string FirstNonRepeating(string A){
+		    // Code here
+		    
+		    //create a hash
+		    unordered_map<int,int>ump;
+		    
+		    //intialize a double ended queue
+		    deque<char> q;
+		    string ans="";
+		    int initialsize=0;
+		    for(int i=0;i<A.size();i++){
+		        ump[A[i]]++;
+		        int n=ump.size();
+		        
+                //if hash size is > than previous so add new element to queue
+		        if(n>initialsize)
+		         q.push_back(A[i]);
+		         
+		         //else find it and remove from deque
+		         else {
+		             auto it=find(q.begin(),q.end(),A[i]);
+		             if(it!=q.end())
+		             q.erase(it);
+		         }
+		         if(!q.empty()){
+		             
+		             ans.push_back(q.front());
+		          //   cout<<ans<<" "<<i<<" ";
+		         }
+		         //if queue is empty add # to ans string
+		         else ans.push_back('#');
+		         initialsize=n;
+		         
+		    }
+		    return ans;
+		    
+		}
+
+};
