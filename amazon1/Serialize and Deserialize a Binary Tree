@@ -1,0 +1,47 @@
+///question link:-https://practice.geeksforgeeks.org/problems/serialize-and-deserialize-a-binary-tree/1#
+class Solution
+{
+    public:
+    //Function to serialize a tree and return a list containing nodes of tree.
+    void serializ(Node *root,vector<int>&v){
+        if(!root){
+            v.push_back(int(NULL));
+            return ;
+        }
+         v.push_back(root->data);
+        serializ(root->left,v);
+       
+        serializ(root->right,v);
+      
+        
+    }
+    vector<int> serialize(Node *root) 
+    {
+        //Your code her
+        // for serialize simple apply preorder traversal for our given tree
+         vector<int> v;
+        serializ(root,v);
+       // for(int i=0;i<v.size();i++)cout<<v[i]<<" ";
+        return v;
+        
+    }
+    
+    //Function to deserialize a list and construct the tree.
+    int index=0;
+    Node * deSerialize(vector<int> &A)
+    {
+        //for deserialize the array to tree create simple tree 
+        //in this i used recursive call for this
+        
+       if(A.size()-1< index or A[index]==NULL){
+           index++;
+           return NULL;
+       }
+       
+       Node* tree=new Node(A[index++]);
+       tree->left=deSerialize(A);
+       tree->right=deSerialize(A);
+       return tree;
+    }
+
+};
