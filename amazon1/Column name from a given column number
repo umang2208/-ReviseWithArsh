@@ -1,0 +1,23 @@
+// same as leetcode excel problem
+//question link:-https://practice.geeksforgeeks.org/problems/column-name-from-a-given-column-number4244/1/
+
+class Solution{
+    public:
+    string colName (long long int n)
+    {
+        // your code here
+        // n-=1;
+        string s;
+       while(n>0){
+           // n-1 for maintaing index for chars
+           //find which char we have to add
+           //and then add from front
+           // divide by 26
+           char c=( 'A'+ (n-1)%26);
+           s=c+s;
+           n=(n-1)/26;
+       }
+    //   reverse(s.begin(),s.end());
+        return s;
+    }
+};
